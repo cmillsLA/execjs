@@ -27,6 +27,7 @@ function _append(selector, arr) {
           });
           script.text = inline;
           selector.appendChild(script);
+          document.write(script);
       } else {
             // html content.
         selector.innerHTML += _content;
