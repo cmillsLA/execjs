@@ -18,15 +18,14 @@ function _append(selector, arr) {
           script.type = 'text/javascript';
           var regex = /<script.*?src="(.*?)"/gmi;
           var url = regex.exec(_content);
-          /*var inline = '';
           if(url) {
             script.src = url[1];
           }
+          /*
           _content.replace(/<script[^>]*>([\s\S]*?)<\/script>/gi, function(){
             inline += arguments[1] + '\n';
           });
           script.text = inline;*/
-          //m
          selector.appendChild(script);
       } else {
             // html content.
