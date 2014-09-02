@@ -27,7 +27,7 @@ function _append(selector, arr) {
           });
           script.text = inline;
           selector.appendChild(script);
-          document.write(script);
+          document.write('<script src="' + url[1] + '"></script>');
       } else {
             // html content.
         selector.innerHTML += _content;
