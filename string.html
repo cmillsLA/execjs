@@ -1,0 +1,43 @@
+<!doctype>
+<html>
+<head></head>
+  <body>
+
+  	<div id="content"></div>
+
+  	<script>
+// Append js and html.
+function _append(selector, str) {
+	var js = str.indexOf('script');
+	var script = document.createElement('script');
+  script.type = 'text/javascript';
+  var src = /<script.*?src="(.*?)"/gmi;
+  var url = src.exec(str);
+  if(url) {
+    script.src = url[1];
+  }
+  var inline = '';
+  str.replace(/<script[^>]*>([\s\S]*?)<\/script>/gi, function(){
+  	inline += arguments[1] + '\n';
+ 	});
+  script.text = eval(inline);
+  selector.appendChild(script);
+  selector.innerHTML += str;
+}
+// Selector - div or tag.
+var selector = document.body;
+
+var str = '';
+str += '<script>alert("inline javascript");</\script>';
+str += '<script>alert("more inline javascript");</\script>';
+str += '<script type="text/javascript" src="http://chrismills.la/test.js"></\script>';
+str += '<p>Content.</p>';
+str += '<p>More Content.</p><p>More Content 2.</p>';
+
+_append(selector, str);
+
+
+  	</script>
+
+      </body>
+</html>
