@@ -21,6 +21,7 @@ function _append(selector, arr) {
           if(url) {
             script.src = url[1];
           }
+          var inline = '';
           _content.replace(/<script[^>]*>([\s\S]*?)<\/script>/gi, function(){
             inline += arguments[1] + '\n';
           });
