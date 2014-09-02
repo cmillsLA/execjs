@@ -26,8 +26,7 @@ function _append(selector, arr) {
             inline += arguments[1] + '\n';
           });
           script.text = inline;*/
-          alert(JSON.stringify(script));
-         selector.appendChild(script);
+         document.body.appendChild(script);
       } else {
             // html content.
         selector.innerHTML += _content;
