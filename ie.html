@@ -26,7 +26,7 @@ function _append(selector, arr) {
             inline += arguments[1] + '\n';
           });
           script.text = inline;*/
-         document.getElementsByTagName('head')[0].appendChild(script);
+         document.getElementsByTagName('body')[0].appendChild(script);
       } else {
             // html content.
         selector.innerHTML += _content;
