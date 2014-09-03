@@ -1,0 +1,89 @@
+<!doctype>
+<head></head>
+<body>
+<div id="content"></div>
+
+
+<script>
+// Append js.
+function _appendJS(d) {
+	var _content = d;
+	// Script tag.
+	var script = document.createElement('script');
+	script.type = 'text/javascript';
+	var regex = /<script.*?src="(.*?)"/gmi;
+	var url = regex.exec(_content);
+	if(url) {
+		// External js.
+		script.src = url[1];
+	} else {
+		// Inline js.
+		var inline = '';
+		_content.replace(/<script[^>]*>([\s\S]*?)<\/script>/gi, function(){
+	  	inline += arguments[1] + '\n';
+	  });
+	  script.text = inline;
+	}
+	document.getElementsByTagName("body")[0].appendChild(script);
+}
+
+// Append html.
+function _appendHTML(d, selector) {
+	if(selector) {
+		selector.innerHTML += d;
+	} else {
+		console.log('Invalid selector provided.');
+	}
+}
+
+// Append.
+function _append(d, selector) {
+	var content = d;
+  switch(typeof content) {
+    case 'string':
+    	_appendHTML(content, selector);
+    	break;
+    case 'object':
+    	for(var i = 0; i< content.length; i++) {
+		    var _content = content[i];
+		    var js = _content.indexOf('<script');
+		    if(js > -1) {
+		    	// js.
+		    	_appendJS(_content);
+		    } else {
+		    	// html.
+		    	_appendHTML(_content, selector);
+		    }
+		  }
+    	break;
+    };
+}
+
+var selector = document.getElementById('content');
+
+// Array of html content and javascript.
+/*var d = [];
+d.push('<h1>html and javascript.</h1>');
+d.push('<p>Content.</p>');
+d.push('<script>alert("inline javascript");</\script>');
+d.push('<script>alert("more inline javascript");</\script>');
+d.push('<script type="text/javascript" src="http://chrismills.la/test.js"></\script>');
+d.push('<p>More Content.</p><p>More Content 2.</p>');*/
+
+
+// String of html content.
+var d = '';
+d += '<h1>html only</h1>';
+d += '<h2>subtitle.</h2>';
+d += '<p>More Content.</p>';
+
+var url = 'http://chrismills.la/test.js';
+document.write('<script type="text/javascript" src="' + url + '"></\script>');
+
+_append(d, selector);
+
+
+</script>
+
+</body>
+</html>
