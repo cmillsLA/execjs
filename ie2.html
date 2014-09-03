@@ -20,13 +20,15 @@ function _append(selector, arr) {
 	        var url = regex.exec(_content);
 	        var inline = '';
 	        if(url) {
-	        	script.src = url[1];
+	          script.src = url[1];
+	        } else {
+	          _content.replace(/<script[^>]*>([\s\S]*?)<\/script>/gi, function(){
+	            inline += arguments[1] + '\n';
+	       	  });
+	          script.text = inline;
 	        }
-	        _content.replace(/<script[^>]*>([\s\S]*?)<\/script>/gi, function(){
-	        	inline += arguments[1] + '\n';
-	       	});
-	        script.text = inline;
-	        selector.appendChild(script);
+	        document.getElementsByTagName("head")[0].appendChild(script);
+	        //selector.appendChild(script);
     	} else {
             // html content.
     		selector.innerHTML += _content;
