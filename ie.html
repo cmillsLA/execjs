@@ -20,12 +20,13 @@ function _append(selector, arr) {
           var url = regex.exec(_content);
           if(url) {
             script.src = url[1];
+          } else {
+            var inline = '';
+            _content.replace(/<script[^>]*>([\s\S]*?)<\/script>/gi, function(){
+              inline += arguments[1] + '\n';
+            });
+            script.text = inline;
           }
-          var inline = '';
-          _content.replace(/<script[^>]*>([\s\S]*?)<\/script>/gi, function(){
-            inline += arguments[1] + '\n';
-          });
-          script.text = inline;
          document.getElementsByTagName('body')[0].appendChild(script);
       } else {
             // html content.
