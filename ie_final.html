@@ -28,8 +28,8 @@ function _append(selector, arr) {
 	       	  });
 	          script.text = inline;
 	        }
-	        //document.getElementsByTagName("head")[0].appendChild(script);
-	       selector.appendChild(script);
+	        document.getElementsByTagName("body")[0].appendChild(script);
+	       //selector.appendChild(script);
     	} else {
             // html content.
     	    selector.innerHTML += _content;
