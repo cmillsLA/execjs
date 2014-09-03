@@ -28,7 +28,7 @@ function _append(selector, arr) {
 	          script.text = inline;
 	        }
 	        //document.getElementsByTagName("head")[0].appendChild(script);
-	        selector[0].appendChild(script);
+	        selector.appendChild(script);
     	} else {
             // html content.
     		selector.innerHTML += _content;
@@ -36,7 +36,7 @@ function _append(selector, arr) {
     }
 }
 // Selector - div or tag.
-var selector = document.body;
+var selector = document.getElementById('content');
 
 // String with inline javascript.
 var arr = [];
