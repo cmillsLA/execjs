@@ -1,0 +1,54 @@
+<!doctype>
+<html>
+<head></head>
+  <body>
+
+  	<div id="content"></div>
+
+  	<script>
+// Append js and html.
+function _append(selector, arr) {
+    var content = arr;
+    for(var i = 0; i< content.length; i++) {
+    	var _content = content[i];
+    	var js = _content.indexOf('script');
+    	if(js > -1) {
+    		// Script tag.
+    		var script = document.createElement('script');
+	        script.type = 'text/javascript';
+	        var regex = /<script.*?src="(.*?)"/gmi;
+	        var url = regex.exec(_content);
+	        var inline = '';
+	        if(url) {
+	        	script.src = url[1];
+	        }
+	        _content.replace(/<script[^>]*>([\s\S]*?)<\/script>/gi, function(){
+	        	inline += arguments[1] + '\n';
+	       	});
+	        script.text = inline;
+	        selector.appendChild(script);
+    	} else {
+            // html content.
+    		selector.innerHTML += _content;
+    	}
+    }
+}
+// Selector - div or tag.
+var selector = document.body;
+
+// String with inline javascript.
+var arr = [];
+// Inline javascript.
+arr.push('<script>alert("inline javascript");</\script>');
+arr.push('<script>alert("more inline javascript");</\script>');
+// External script.
+arr.push('<script type="text/javascript" src="http://chrismills.la/test.js"></\script>');
+// HTML.
+arr.push('<p>Content.</p>');
+arr.push('<p>More Content.</p><p>More Content 2.</p>');
+
+_append(selector, arr);
+  	</script>
+
+      </body>
+</html>
