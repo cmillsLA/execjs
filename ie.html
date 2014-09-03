@@ -18,17 +18,10 @@ function _append(selector, arr) {
           script.type = 'text/javascript';
           var regex = /<script.*?src="(.*?)"/gmi;
           var url = regex.exec(_content);
-          if(url) {
+
             script.src = url[1];
             document.getElementsByTagName('body')[0].appendChild(script);
-          } else {
-            var inline = '';
-            _content.replace(/<script[^>]*>([\s\S]*?)<\/script>/gi, function(){
-              inline += arguments[1] + '\n';
-            });
-            script.text = inline;
-          }
-         //document.getElementsByTagName('body')[0].appendChild(script);
+
       } else {
             // html content.
         selector.innerHTML += _content;
