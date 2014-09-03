@@ -19,17 +19,17 @@ function _append(selector, arr) {
           var regex = /<script.*?src="(.*?)"/gmi;
           var url = regex.exec(_content);
                      script.src = url[1];
-              alert('ie');
-        script.onreadystatechange = function(){
-            if (script.readyState == "loaded" ||
-                    script.readyState == "complete"){
-                            alert('complete');
-                script.onreadystatechange = null;
-            }
-        };
+             var script = document.createElement("script");
+script.techange = function(){
+    if (script.readyState == "loaded" ||
+            script.readyState == "complete"){
+        script.onreadystatechange = null;
+        alert("Script is ready!");
+    }
+};
+document.body.appendChild(script);
     }
 
-            document.getElementsByTagName('body')[0].appendChild(script);
 
       } else {
             // html content.
