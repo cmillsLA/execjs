@@ -19,13 +19,14 @@ function _append(selector, arr) {
           var regex = /<script.*?src="(.*?)"/gmi;
           var url = regex.exec(_content);
           
-              if (script.readyState){  //IE
-        script.onreadystatechange = function(){
-            if (script.readyState == "loaded" ||
-                    script.readyState == "complete"){
-                script.onreadystatechange = null;
-            }
-        };
+             script.onreadystatechange = function(){
+          if (script.readyState == "loaded" ||
+                  script.readyState == "complete"){
+              script.onreadystatechange = null;
+              alert("Script is ready!");
+          }
+      };
+
     }
 
             script.src = url[1];
