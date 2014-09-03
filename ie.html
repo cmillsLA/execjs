@@ -11,7 +11,7 @@ function _append(selector, arr) {
     var content = arr;
     for(var i = 0; i< content.length; i++) {
       var _content = content[i];
-      var js = _content.indexOf('script')a;
+      var js = _content.indexOf('script');
       if(js > -1) {
         // Script tag.
         var script = document.createElement('script');
