@@ -21,19 +21,18 @@ function _append(selector, arr) {
           
           
            if (script.readyState){  //IE
-           alert('ie!');
+
         script.onreadystatechange = function(){
-          alert('on ready state change');
-          alert(script.readyState);
+
             if (script.readyState == "loaded" ||
                     script.readyState == "complete"){
-                      alert('loaded!');
+                  
                 script.onreadystatechange = null;
             }
         };
     } 
   script.src = url[1];
-document.body.appendChild(script);
+document.getElementsByTagName("head")[0].appendChild(script);
 
 
       } else {
