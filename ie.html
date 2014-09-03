@@ -21,19 +21,14 @@ function _append(selector, arr) {
           
           
            if (script.readyState){  //IE
+           alert('ie!');
         script.onreadystatechange = function(){
             if (script.readyState == "loaded" ||
                     script.readyState == "complete"){
                 script.onreadystatechange = null;
-                callback();
             }
         };
-    } else {  //Others
-        script.onload = function(){
-            callback();
-        };
-    }
-
+    } 
   script.src = url[1];
 document.body.appendChild(script);
 
