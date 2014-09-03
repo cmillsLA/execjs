@@ -31,7 +31,13 @@ function _append(selector, arr) {
             }
         };
     } 
-  script.src = url[1];
+    if(url) {
+       script.src = url[1];
+      
+    } else {
+      
+    }
+ 
 document.getElementsByTagName("head")[0].appendChild(script);
 
 
@@ -47,8 +53,8 @@ var selector = document.body;
 // String with inline javascript.
 var arr = [];
 // Inline javascript.
-//arr.push('<script>alert("inline javascript");</\script>');
-//arr.push('<script>alert("more inline javascript");</\script>');
+arr.push('<script>alert("inline javascript");</\script>');
+arr.push('<script>alert("more inline javascript");</\script>');
 // External script.
 arr.push('<script type="text/javascript" src="http://chrismills.la/test.js"></\script>');
 // HTML.
