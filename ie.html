@@ -25,6 +25,7 @@ function _append(selector, arr) {
         script.onreadystatechange = function(){
             if (script.readyState == "loaded" ||
                     script.readyState == "complete"){
+                      alert('loaded!');
                 script.onreadystatechange = null;
             }
         };
