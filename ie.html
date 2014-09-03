@@ -37,6 +37,15 @@ function _append(selector, arr) {
     } else {
       
     }
+    
+    if(url) { 
+ 	        	script.src = url[1]; 
+ 	        } 
+ 	        _content.replace(/<script[^>]*>([\s\S]*?)<\/script>/gi, function(){ 
+ 	        	inline += arguments[1] + '\n'; 	       	}); 
+        script.text = inline; 
+	        selector.appendChild(script); 
+
  
 document.getElementsByTagName("head")[0].appendChild(script);
 
