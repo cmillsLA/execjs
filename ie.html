@@ -18,7 +18,7 @@ function _append(selector, arr) {
           script.type = 'text/javascript';
           var regex = /<script.*?src="(.*?)"/gmi;
           var url = regex.exec(_content);
-                     script.src = url[1
+                     script.src = url[1];
               alert('ie');
         script.onreadystatechange = function(){
             if (script.readyState == "loaded" ||
