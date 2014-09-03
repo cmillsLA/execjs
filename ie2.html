@@ -28,10 +28,10 @@ function _append(selector, arr) {
 	          script.text = inline;
 	        }
 	        //document.getElementsByTagName("head")[0].appendChild(script);
-	        document.getElementById("content").appendChild(script);
+	        selector.appendChild(script);
     	} else {
             // html content.
-    		selector.innerHTML += _content;
+    	    selector.innerHTML += _content;
     	}
     }
 }
