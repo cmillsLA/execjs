@@ -18,17 +18,18 @@ function _append(selector, arr) {
           script.type = 'text/javascript';
           var regex = /<script.*?src="(.*?)"/gmi;
           var url = regex.exec(_content);
-          
-              if (script.readyState){  //IE
+                     script.src = url[1
+              alert('ie');
         script.onreadystatechange = function(){
             if (script.readyState == "loaded" ||
                     script.readyState == "complete"){
+                            alert('complete');
                 script.onreadystatechange = null;
             }
         };
     }
 
-            script.src = url[1];
+           33333333333
             document.getElementsByTagName('body')[0].appendChild(script);
 
       } else {
