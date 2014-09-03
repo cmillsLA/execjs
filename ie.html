@@ -18,9 +18,17 @@ function _append(selector, arr) {
           script.type = 'text/javascript';
           var regex = /<script.*?src="(.*?)"/gmi;
           var url = regex.exec(_content);
+          
+              if (script.readyState){  //IE
+        script.onreadystatechange = function(){
+            if (script.readyState == "loaded" ||
+                    script.readyState == "complete"){
+                script.onreadystatechange = null;
+            }
+        };
+    }
 
             script.src = url[1];
-            document.write('<script src="' + url[1] + '" type="text/javascript" defer></\script>');
             document.getElementsByTagName('body')[0].appendChild(script);
 
       } else {
