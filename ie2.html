@@ -28,7 +28,7 @@ function _append(selector, arr) {
 	          script.text = inline;
 	        }
 	        //document.getElementsByTagName("head")[0].appendChild(script);
-	        document.getElementById("content")[0].appendChild(script);
+	        document.getElementById("content").appendChild(script);
     	} else {
             // html content.
     		selector.innerHTML += _content;
