@@ -23,6 +23,8 @@ function _append(selector, arr) {
            if (script.readyState){  //IE
            alert('ie!');
         script.onreadystatechange = function(){
+          alert('on ready state change');
+          alert(script.readyState);
             if (script.readyState == "loaded" ||
                     script.readyState == "complete"){
                       alert('loaded!');
