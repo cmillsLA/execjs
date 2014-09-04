@@ -1,0 +1,57 @@
+<!doctype>
+<head></head>
+<body>
+<div id="content"></div>
+
+
+<script>
+// Append.
+function _append(d, selector) {
+	var content = d;
+	var js = content.match(/<script/g);
+	// Create and append javascript.
+	if(js) {
+		var urls = [];
+		var inline = '';
+		var regInline = /<script[^type="(.*?)">]*>([\s\S]*?)<\/script>/gmi;
+		var regSrc = /<script.*?src="(.*?)"><\/script>/gmi;
+		// Extract and execute inline javascript.
+		content = content.replace(regInline, function(){
+			inline += arguments[1] + '\n';
+			return '';
+		});
+		var script = document.createElement('script');
+		script.type = 'text/javascript';
+		script.text = inline;
+	  document.getElementsByTagName("body")[0].appendChild(script);
+		// Extract and append external javascript urls.
+		content = content.replace(regSrc, function(){
+			urls.push(arguments[1]);
+			return '';
+		});
+		for(var i=0; i<urls.length; i++) {
+			var _url = urls[i];
+			document.write('<script type="text/javascript" src="' + _url + '"><\/script>');
+		}
+	}
+	// Append html.
+	if(selector) {
+		selector.innerHTML += d;
+	} else {
+		console.log('Invalid selector provided.');
+	}
+}
+
+var selector = document.getElementById('content');
+
+var d = '<script>alert("inline javascript 1");</\script><h1>html only</h1><h2>subtitle.</h2><script>alert("inline javascript 2");</\script><script>alert("inline javascript 3");</\script><script type="text/javascript" src="http://chrismills.la/test.js"></\script><script>alert("more inline javascript");</\script><p>More Content.</p>';
+
+_append(d, selector);
+
+
+</script>
+
+
+
+</body>
+</html>
