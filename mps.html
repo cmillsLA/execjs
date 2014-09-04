@@ -30,6 +30,7 @@
     
     <script>
       mps._append = function(d, selector) {
+        alert('append called');
         console.log('append called');
         var content = d;
         var js = content.match(/<script/g);
