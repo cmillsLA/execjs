@@ -35,7 +35,6 @@
         var js = content.match(/<script/g);
         // Create and append javascript.
         if(js) {
-          console.log('js present');
           var urls = [];
           var inline = '';
           var regInline = /<script[^type="(.*?)">]*>([\s\S]*?)<\/script>/gmi;
