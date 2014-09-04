@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MPS Client-Side Test: Bravo</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+
+    <!------[mps:Main]------------------------------------------------------------>
+      <script> var debugmode = {'log':1};
+        var mpscall = {
+          'path':'TEST',
+          'site':'bravo-web'
+        }
+        var mpsopts={
+          'host':'devmps.com'
+        };
+        var mps=mps||{}; document.write('<scr'+'ipt id="mps-ext-load" src="http://'+mpsopts.host+'/fetch/ext/load-'+mpscall.site+'.js"></scr'+'ipt>');
+      </script>
+    <!------[/mps:Main]------------------------------------------------------------>
+    
+    <script>// Dynamically attach more ads to page (goes where the page is executing load more actions)
+      function loadMore() {
+        mps.gptloadCallback = function() {
+          mps._append('<h1>test<h1><script>alert("test2");</\script><h1>test3</h1><script src="http://chrismills.la/test.js"></\script>', mps._select('#new-container'));
+          //$('#new-container').append(mps.getAd('topbanner')).append(mps.getAd('topbox'));
+          //mps._append('<h1>test</h1>',document.body);
+        }
+        mps.makeRequest && mps.makeRequest('more');
+      }
+    </script>
+    
+    <script>
+      mps._append = function(d, selector) {
+        console.log('append called');
+        var content = d;
+        var js = content.match(/<script/g);
+        // Create and append javascript.
+        if(js) {
+          console.log('js present');
+          var urls = [];
+          var inline = '';
+          var regInline = /<script[^type="(.*?)">]*>([\s\S]*?)<\/script>/gmi;
+          var regSrc = /<script.*?src="(.*?)"><\/script>/gmi;
+          // Extract and execute inline javascript.
+          console.log('1');
+          content = content.replace(regInline, function(){
+            inline += arguments[1] + '\n';
+            return '';
+          });
+          console.log('2');
+          var script = document.createElement('script');
+          script.type = 'text/javascript';
+          script.text = inline;
+          document.getElementsByTagName("body")[0].appendChild(script);
+          // Extract and append external javascript urls.
+          content = content.replace(regSrc, function(){
+            urls.push(arguments[1]);
+            return '';
+          });
+          console.log('3');
+          console.log(content);
+          for(var i=0; i<urls.length; i++) {
+            var _url = urls[i];
+            //document.write('<script type="text/javascript" src="' + _url + '"><\/scr' + 'ipt>');
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = _url;
+            document.getElementsByTagName("head")[0].appendChild(script);
+          }
+          console.log(urls);
+        }
+        console.log('4');
+        // Append html.
+        if(selector) {
+          /*var parser = new DOMParser();
+          var el = parser.parseFromString(d, "text/html");
+          selector.appendChild(el.childNodes[0]);*/
+          var div = document.createElement('div');
+          div.innerHTML += d;
+          selector.appendChild(div);
+        } else {
+          console.log('Invalid selector provided.');
+        }
+      }
+    </script>
+
+    <style>
+      iframe {
+        visibility:visible !important;
+      }
+    </style>
+    
+  </head>
+
+  <body>
+    <!--[mps:Ad]-->
+    <script>typeof(mps.getAd)=='function' && document.write(mps.getAd('topbanner'))</script>
+    
+    <!--[mps:Ad]-->
+    <script>typeof(mps.getAd)=='function' && document.write(mps.getAd('topmulti'))</script>
+    
+    <!--[mps:Footer]-->
+    <script>typeof(mps.writeFooter)=='function' && mps.writeFooter()</script>
+
+    <div id="new-container" style="margin:8px; padding:8px; border:1px dashed green;"></div>
+
+    <button style="font-size:24px; margin:12px; padding: 8px;" onclick="loadMore();">Load More</button>
+    
+  </body>
+
+</html>
