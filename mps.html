@@ -63,9 +63,10 @@
         }
         // Append html.
         if(selector) {
-          var div = document.createElement('div');
-          div.innerHTML += d;
-          selector.appendChild(div);
+          //var div = document.createElement('div');
+          //div.innerHTML += d;
+          //selector.appendChild(div);
+          selector.insertAdjacentHTML('beforeend', d);
         } else {
           console.log('Invalid selector provided.');
         }
